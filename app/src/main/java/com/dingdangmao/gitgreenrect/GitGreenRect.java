@@ -79,13 +79,19 @@ public class GitGreenRect extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float left = 0;
-        float top = 0;
+        int width=getWidth()-getPaddingRight();
+        int height=getHeight()-getPaddingBottom();
+        float left ;
+        float top ;
         for (int i = 0; i < data.length; i++) {
-            top = (size + space) * i;
+            top = (size + space) * i+ getPaddingTop();
+            if(top+size>height)
+                break;
             for (int j = 0; j < data[i].length; j++) {
                 p.setColor(getColor(data[i][j]));
-                left = (size + space) * j;
+                left = (size + space) * j+getPaddingLeft();
+                if(left+size>width)
+                    break;
                 canvas.drawRect(left, top, left + size, top + size, p);
             }
         }

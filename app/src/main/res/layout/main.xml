@@ -18,6 +18,7 @@
         android:id="@+id/git1"
         app:size="30dp"
         app:space="5dp"
+        android:padding="20dp"
         android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
@@ -25,6 +26,7 @@
         android:id="@+id/git2"
         app:size="25dp"
         app:space="5dp"
+        android:padding="20dp"
         android:background="#FFFFFF"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
