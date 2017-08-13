@@ -16,18 +16,18 @@ import android.view.View;
 
 public class GitGreenRect extends View {
 
-    int cStart;
-    int cEnd;
-    int max;
-    int min;
-    float size;
-    float space;
-    int row;
-    int col;
-    int[][] data = null;
-    String[] color = new String[]{"#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"};
-    Paint p;
-    onListener listener;
+    private int cStart;
+    private int cEnd;
+    private int max;
+    private int min;
+    private float size;
+    private float space;
+    private int row;
+    private int col;
+    private int[][] data = null;
+    private String[] color = new String[]{"#ebedf0", "#c6e48b", "#7bc96f", "#239a3b", "#196127"};
+    private Paint p;
+    private onListener listener;
 
     public GitGreenRect(Context context) {
         this(context, null);
@@ -44,18 +44,24 @@ public class GitGreenRect extends View {
     }
 
     private void init(Context context, AttributeSet attrs, int defStyleAttr) {
+
         TypedArray attr = context.obtainStyledAttributes(attrs, R.styleable.GitGreenRect, defStyleAttr, 0);
+
         try {
+
             cStart = attr.getColor(R.styleable.GitGreenRect_cStart, Color.parseColor("#ebedf0"));
             cEnd = attr.getColor(R.styleable.GitGreenRect_cEnd, Color.parseColor("#196127"));
             size = attr.getDimension(R.styleable.GitGreenRect_size, 0);
             space = attr.getDimension(R.styleable.GitGreenRect_space, 0);
+
         } catch (Exception e) {
+
             Log.i("Unit", e.toString());
+
         } finally {
+
             attr.recycle();
         }
-
         p = new Paint();
         p.setStyle(Paint.Style.FILL);
     }
@@ -79,18 +85,18 @@ public class GitGreenRect extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        int width=getWidth()-getPaddingRight();
-        int height=getHeight()-getPaddingBottom();
-        float left ;
-        float top ;
+        int width = getWidth() - getPaddingRight();
+        int height = getHeight() - getPaddingBottom();
+        float left;
+        float top;
         for (int i = 0; i < data.length; i++) {
-            top = (size + space) * i+ getPaddingTop();
-            if(top+size>height)
+            top = (size + space) * i + getPaddingTop();
+            if (top + size > height)
                 break;
             for (int j = 0; j < data[i].length; j++) {
                 p.setColor(getColor(data[i][j]));
-                left = (size + space) * j+getPaddingLeft();
-                if(left+size>width)
+                left = (size + space) * j + getPaddingLeft();
+                if (left + size > width)
                     break;
                 canvas.drawRect(left, top, left + size, top + size, p);
             }
@@ -125,6 +131,7 @@ public class GitGreenRect extends View {
     }
 
     private int getRow(float y) {
+        y=y-getPaddingTop();
         int i = (int) (y / (size + space));
         if (i * (size + space) <= y && i * (size + space) + size >= y && i < data.length)
             return i;
@@ -132,6 +139,7 @@ public class GitGreenRect extends View {
     }
 
     private int getCol(float x) {
+        x=x-getPaddingLeft();
         int i = (int) (x / (size + space));
         if (row != -1 && i * (size + space) <= x && i * (size + space) + size >= x && i < data[row].length)
             return i;
