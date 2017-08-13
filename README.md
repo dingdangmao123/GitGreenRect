@@ -1,5 +1,5 @@
 # GitGreenRect
-a android view like github contribution view
+a android rectangle view like github contributions
 
 # snap
 ![GitGreenRect](/snap/demo.PNG)
